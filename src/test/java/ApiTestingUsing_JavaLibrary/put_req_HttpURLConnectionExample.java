@@ -8,43 +8,43 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class post_req_HttpURLConnectionExample {
+public class put_req_HttpURLConnectionExample {
 
-	public void postMethodExample() throws IOException {
+	public void putRequestExample() throws IOException {
 
 		URL url = new URL("https://reqres.in/api/users/2");
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-		connection.setRequestMethod("POST");
-		connection.setRequestProperty("Content-Type", "appliation/json");
+		connection.setRequestMethod("PUT");
+
+		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setDoOutput(true);
 
-		String jsonBody = "{\"name\": \"morpheus\",\"job\": \"leader\"}";
+		String jsonBody = "{\"name\": \"morpheus\",\"job\": \"president\"}";
+
 		byte[] inputJson = jsonBody.getBytes();
-		
+
 		OutputStream outputStream = connection.getOutputStream();
 		outputStream.write(inputJson);
-		
-		System.out.println("Status Code : "+connection.getResponseCode());
-		System.out.println("Response Message : "+connection.getResponseMessage());
-		
+
 		InputStream inputStream = connection.getInputStream();
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-		
+
 		BufferedReader bufferReader = new BufferedReader(inputStreamReader);
-		
+
 		String line;
 		StringBuffer buffer = new StringBuffer();
 		while((line = bufferReader.readLine())!=null) {
 			buffer = buffer.append(line);
 		}
-		
+
 		System.out.println(buffer);
+
 	}
-	
+
 	public static void main(String[] args) throws IOException {
-		post_req_HttpURLConnectionExample postRequestExample = new post_req_HttpURLConnectionExample();
-		postRequestExample.postMethodExample();
+		put_req_HttpURLConnectionExample putReqExample = new put_req_HttpURLConnectionExample();
+		putReqExample.putRequestExample();
 	}
 
 }

@@ -4,38 +4,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class post_req_HttpURLConnectionExample {
-
-	public void postMethodExample() throws IOException {
-
+public class delete_req_HttpURLConnectionExample {
+	
+	public void deleteMethodExample() throws IOException {
+		
 		URL url = new URL("https://reqres.in/api/users/2");
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-		connection.setRequestMethod("POST");
-		connection.setRequestProperty("Content-Type", "appliation/json");
+		
+		connection.setRequestMethod("DELETE");
+		
+		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setDoOutput(true);
-
-		String jsonBody = "{\"name\": \"morpheus\",\"job\": \"leader\"}";
-		byte[] inputJson = jsonBody.getBytes();
 		
-		OutputStream outputStream = connection.getOutputStream();
-		outputStream.write(inputJson);
-		
-		System.out.println("Status Code : "+connection.getResponseCode());
+		System.out.println("Status code : "+connection.getResponseCode());
 		System.out.println("Response Message : "+connection.getResponseMessage());
 		
 		InputStream inputStream = connection.getInputStream();
 		InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-		
 		BufferedReader bufferReader = new BufferedReader(inputStreamReader);
 		
 		String line;
 		StringBuffer buffer = new StringBuffer();
-		while((line = bufferReader.readLine())!=null) {
+		
+		while((line = bufferReader.readLine())!=null){
 			buffer = buffer.append(line);
 		}
 		
@@ -43,8 +37,8 @@ public class post_req_HttpURLConnectionExample {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		post_req_HttpURLConnectionExample postRequestExample = new post_req_HttpURLConnectionExample();
-		postRequestExample.postMethodExample();
+		delete_req_HttpURLConnectionExample deleteReqExample = new delete_req_HttpURLConnectionExample();
+		deleteReqExample.deleteMethodExample();
 	}
 
 }
